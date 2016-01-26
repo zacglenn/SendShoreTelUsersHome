@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Text.RegularExpressions;
 using WatiN.Core;
 
-namespace ConsoleApplication1
+namespace SendShoreTelUsersHome
 {
     class Program
     {
