@@ -1,3 +1,2 @@
-# ConsoleApplication1
-testing - this console application utilizes WatiN (http://watin.org/) to navigate an internet website via internet explorer and sign into said webiste. Website 
--finish this later
+# SendShoreTelUsersHome
+This console application utilizes WatiN (http://watin.org/) to navigate the internet, pull phone extension data from an html table, and execute console commands for each extension; returning each phone extension to it's starting position.
