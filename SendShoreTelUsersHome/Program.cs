@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Configuration;
+using System.Diagnostics;
+using System.IO;
 using System.Text.RegularExpressions;
 using WatiN.Core;
 
@@ -32,9 +34,15 @@ namespace SendShoreTelUsersHome
 
             var userListTable = myIE3.Table(Find.By("_t", "Users"));
 
-            //Prepare the ports!
-            Console.WriteLine("var sports = new ActiveXObject('ShoreBusDS.sPorts');");
+            //create/overwrite javascript file
+            string jspath = @"C:\SendShoreTelUsersHome.js";
+            File.Create(jspath).Close();
+            StreamWriter sw = new StreamWriter(jspath);
 
+            //Prepare the ports!
+            sw.WriteLine("var ports = new ActiveXObject('ShoreBusDS.Ports');");
+
+            //writing go home line for each extension
             foreach (var tableRow in userListTable.TableRows)
             {
                 //sample text layout of each tr.Text: " Zac Glenn Headquarters Executives Personal 7777 7777 AB77 77 Zac Glenn Home "
@@ -42,9 +50,23 @@ namespace SendShoreTelUsersHome
                 {
                     Match match = Regex.Match(tableRow.Text, @"\d{4}");
                     string extension = match.Value;
-                    Console.WriteLine("sports.UserGoHome('" + extension + "');");
+
+                    if (!string.IsNullOrEmpty(extension))
+                    {
+                        sw.WriteLine("ports.UserGoHome('" + extension + "');");
+                    }
                 }
             }
+            //close file connection because exceptions arise that the file is already in use etc
+            sw.Close();
+
+            //create your cmd process to execute js file using wscript
+            Process process = new Process();
+            process.StartInfo.FileName = "wscript.exe";
+            process.StartInfo.WorkingDirectory = @"c:\";
+            process.StartInfo.Arguments = "SendShoreTelUsersHome.js";
+            process.Start();
+
             //close everything we opened
             myIE.ForceClose();
         }
