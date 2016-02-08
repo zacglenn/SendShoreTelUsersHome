@@ -89,6 +89,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AES.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -96,6 +97,14 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="P:\Shared\Apps\AppSettings\AppSettings.config">
+      <Link>AppSettings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="P:\Shared\Apps\AppSettings\GlobalSettings.config">
+      <Link>GlobalSettings.config</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="SendShoreTelUsersHome_TemporaryKey.pfx" />
   </ItemGroup>

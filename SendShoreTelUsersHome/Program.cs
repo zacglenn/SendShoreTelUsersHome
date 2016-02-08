@@ -12,11 +12,13 @@ namespace SendShoreTelUsersHome
         [STAThread]
         static void Main(string[] args)
         {
+            AES aes = new AES();
+
             //grab from the appSettings
-            string username = ConfigurationManager.AppSettings["username"];
-            string password = ConfigurationManager.AppSettings["password"];
-            string shoreTelDirectorLogin = ConfigurationManager.AppSettings["ShoreTelDirectorLogin"];
-            string shoreTelUserList = ConfigurationManager.AppSettings["ShoreTelUserList"];
+            string username = AES.Decrypt(ConfigurationManager.AppSettings["username"]);
+            string password = AES.Decrypt(ConfigurationManager.AppSettings["password"]);
+            string shoreTelDirectorLogin = AES.Decrypt(ConfigurationManager.AppSettings["ShoreTelDirectorLogin"]);
+            string shoreTelUserList = AES.Decrypt(ConfigurationManager.AppSettings["ShoreTelUserList"]);
 
             //nav to url
             IE myIE = new IE(shoreTelDirectorLogin);
